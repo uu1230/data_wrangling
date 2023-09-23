@@ -1,21 +1,72 @@
 ---
-title: "Simple document"
+title: "Data Manipulation"
 output: github_document
 ---
 
-I'm an R Markdown document! 
-
-# Section 1
-
-Here's a **code chunk** that samples from 
-a _normal distribution_:
-
 ```{r}
-samp = rnorm(100)
-length(samp)
+library(tidyverse)
 ```
 
-# Section 2
+Let's import the `FAS_litters.csv` csv.
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+```{r}
+litters_df=
+  read_csv('FAS_litters.csv')
+litters_df=
+  janitor::clean_names(litters_df)
+```
+
+```{r}
+pups_df=
+  read_csv('FAS_pups.csv')
+pups_df=
+  janitor::clean_names(pups_df)
+```
+
+```{r}
+select(litters_df,group,litter_number,gd0_weight)
+
+select(litters_df,gd0_weight,group)
+
+select(litters_df,group,gd0_weight: gd_of_birth)
+
+select(litters_df,group,starts_with('pups'))
+
+select(litters_df,-litter_number)
+
+select(litters_df,group,litter_id=litter_number,everything())
+select(litters_df,gd0_weight,everything())
+```
+
+
+```{r}
+rename(litters_df,litter_id=litter_number)
+relocate(litters_df,litter_number)
+```
+
+```{r}
+select(litters_df, group)
+pull(litters_df, group)
+
+```
+
+```{r}
+filter(litters_df,group=="Con7" )
+
+filter(litters_df,group=="Con7" | group=='Con8')
+
+filter(litters_df,group%in% c("Con7","Con8"))
+```
+
+```{r}
+mutate(litters_df,wt_gain = gd18_weight - gd0_weight,group=str_to_lower(group))
+
+```
+
+```{r}
+
+arrange(litters_df,gd0_weight)
+arrange(litters_df,group,gd0_weight)
+
+
+```
