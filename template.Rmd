@@ -15,7 +15,9 @@ litters_df=
 litters_df=
   janitor::clean_names(litters_df)
 ```
-absolute directory
+
+
+absolute directory!
 ```{r}
 litter_df=read.csv('~/Columbia/ds/data_wrangling/data/FAS_litters.csv')
 litter_df=read.csv('C:/Users/ariaw/Documents/Columbia/ds/data_wrangling/data/FAS_litters.csv')
@@ -28,6 +30,24 @@ pups_df=
 pups_df=
   janitor::clean_names(pups_df)
 ```
+
+```{r}
+litters_df
+head(litters_df)
+tail(litters_df)
+```
+
+
+```{r,eval=FALSE}
+view(litetrs_df)
+```
+
+
+```{r}
+str(litters_df)
+skimr::skim(litters_df)
+```
+
 
 ```{r}
 select(litters_df,group,litter_number,gd0_weight)
