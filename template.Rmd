@@ -11,14 +11,14 @@ Let's import the `FAS_litters.csv` csv.
 
 ```{r}
 litters_df=
-  read_csv('FAS_litters.csv')
+  read_csv('data/FAS_litters.csv')
 litters_df=
   janitor::clean_names(litters_df)
 ```
 
 ```{r}
 pups_df=
-  read_csv('FAS_pups.csv')
+  read_csv('data/FAS_pups.csv')
 pups_df=
   janitor::clean_names(pups_df)
 ```
