@@ -16,6 +16,11 @@ library(tidyverse)
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
+``` r
+library(readxl)
+library(haven)
+```
+
 Let’s import the `FAS_litters.csv` csv.
 
 ``` r
@@ -178,6 +183,54 @@ Data summary
 | pups_born_alive |         0 |          1.00 |  7.35 | 1.76 |  3.0 |  6.00 |  8.00 |  8.00 | 11.0 | ▁▃▂▇▁ |
 | pups_dead_birth |         0 |          1.00 |  0.33 | 0.75 |  0.0 |  0.00 |  0.00 |  0.00 |  4.0 | ▇▂▁▁▁ |
 | pups_survive    |         0 |          1.00 |  6.41 | 2.05 |  1.0 |  5.00 |  7.00 |  8.00 |  9.0 | ▁▃▂▇▇ |
+
+``` r
+litters_df=read_csv(
+  'data/FAS_litters.csv',
+  skip=10,
+  col_names=FALSE,
+  na=c('NA',19),
+  col_types=
+    cols(
+      "GD0 weight"=col_character()
+    ))
+```
+
+    ## Warning: The following named parsers don't match the column names: GD0 weight
+
+``` r
+mlb_df=
+  read_excel('data/mlb11.xlsx')
+```
+
+``` r
+pulse_df=
+  read_sas('data/public_pulse_data.sas7bdat')
+```
+
+``` r
+litters_df=
+  read.csv('data/FAS_litters.csv')
+```
+
+``` r
+litters_df=
+  read_csv('data/FAS_litters.csv')
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+litters_df=
+  janitor::clean_names(litters_df)
+```
 
 ``` r
 select(litters_df,group,litter_number,gd0_weight)
