@@ -232,6 +232,12 @@ litters_df=
   janitor::clean_names(litters_df)
 ```
 
+export data
+
+``` r
+write_csv(litters_df,"data/litters_cleaned.csv")
+```
+
 ``` r
 select(litters_df,group,litter_number,gd0_weight)
 ```
